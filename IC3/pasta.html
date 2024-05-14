@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Page</title>
+  <!-- Adicionando Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Estilos personalizados podem ser adicionados aqui */
+     body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #007bff;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .row {
+      margin-top: 30px;
+    }
+
+    .img-thumbnail {
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .img-thumbnail:hover {
+      transform: scale(1.05);
+    }
+
+    .img-thumbnail img {
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+        <div class="row">
+            <!-- Iterando sobre as imagens provenientes do backend -->
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="https://t.ctcdn.com.br/lvns56iaSMyHvyTur4JeYS_NYeY=/i606944.png" alt="Imagem 1"
+                        class="img-fluid">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="./imgs/penguino.jpg" alt="Imagem 2" class="img-fluid">
+                </div>
+            </div>                 
+        </div>
+    </div>
+
+    <!-- Modal para mostrar informações detalhadas da imagem -->
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="" class="img-fluid" id="modalImage">
+                    <p id="modalInfo"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+  <!-- Adicionando Bootstrap JS (opcional, necessário apenas se você estiver usando componentes JS do Bootstrap) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+        // Função para exibir informações da imagem ao clicar
+        $('.thumbnail').click(function () {
+            var imgSrc = $(this).find('img').attr('src');
+            var imgAlt = $(this).find('img').attr('alt');
+            var imgInfo = $(this).find('.caption').html();
+
+            $('#modalImage').attr('src', imgSrc);
+            $('#modalInfo').html(imgAlt + '<br>' + imgInfo);
+            $('#imageModal').modal('show');
+        });
+    </script>
+
+</body>
+</html>
+

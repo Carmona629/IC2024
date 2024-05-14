@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria de Imagens</title>
+  <!-- Adicionando Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Estilo adicional para centralizar as miniaturas */
+    .thumbnail {
+      display: inline-block;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="text-center my-4">Galeria de Imagens</h1>
+  <div class="row" id="galeriaImagens">
+    <!-- Miniaturas das imagens serão inseridas aqui -->
+  </div>
+</div>
+
+<!-- Modal para exibir detalhes da imagem -->
+<div class="modal fade" id="detalhesImagemModal" tabindex="-1" role="dialog" aria-labelledby="detalhesImagemModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detalhesImagemModalLabel">Detalhes da Imagem</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="" class="img-fluid" id="imagemDetalhes">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Adicionando Bootstrap JS e jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  // Função para carregar e exibir miniaturas das imagens
+  $(document).ready(function(){
+    // Diretório das imagens
+    var diretorio = './imagens/';
+    // Seleciona o elemento onde as miniaturas serão inseridas
+    var galeriaImagens = $('#galeriaImagens');
+    // Obtém uma lista de arquivos no diretório de imagens
+    $.ajax({
+      url: diretorio,
+      success: function (data) {
+        $(data).find("a:contains('.jpg'), a:contains('.jpeg'), a:contains('.png'), a:contains('.gif')").each(function () {
+          var imagem = $(this).attr('href');
+          // Cria o elemento de miniatura da imagem e insere na galeria
+          $('<div class="col-md-3"><div class="thumbnail"><img src="' + diretorio + '/' + imagem + '" class="img-thumbnail" data-imagem="' + diretorio + '/' + imagem + '" data-toggle="modal" data-target="#detalhesImagemModal"></div></div>').appendTo(galeriaImagens);
+        });
+      }
+    });
+  });
+
+  // Ao clicar duas vezes em uma miniatura, exibe os detalhes da imagem no modal
+  $(document).on('dblclick', '.thumbnail', function(){
+    var imagem = $(this).find('img').data('imagem');
+    $('#imagemDetalhes').attr('src', imagem);
+    $('#detalhesImagemModal').modal('show');
+  });
+</script>
+
+</body>
+</html>
+

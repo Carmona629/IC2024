@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens Responsivas</title>
+    <!-- Adicionando o Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .thumbnail {
+            margin-bottom: 20px;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: auto;
+        }
+
+        .modal-body img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <!-- Iterando sobre as imagens provenientes do backend -->
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="https://t.ctcdn.com.br/lvns56iaSMyHvyTur4JeYS_NYeY=/i606944.png" alt="Imagem 1"
+                        class="img-fluid">
+                    <div class="caption">
+                        <p>Imagem 1 - link </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="./imgs/penguino.jpg" alt="Imagem 2" class="img-fluid">
+                    <div class="caption">
+                        <p>Imagem 2 - Imagem em um diretório ao lado do html </p>
+                    </div>
+                </div>
+            </div>                 
+        </div>
+    </div>
+
+    <!-- Modal para mostrar informações detalhadas da imagem -->
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="" class="img-fluid" id="modalImage">
+                    <p id="modalInfo"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicionando jQuery e Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Função para exibir informações da imagem ao clicar
+        $('.thumbnail').click(function () {
+            var imgSrc = $(this).find('img').attr('src');
+            var imgAlt = $(this).find('img').attr('alt');
+            var imgInfo = $(this).find('.caption').html();
+
+            $('#modalImage').attr('src', imgSrc);
+            $('#modalInfo').html(imgAlt + '<br>' + imgInfo);
+            $('#imageModal').modal('show');
+        });
+    </script>
+
+</body>
+
+</html>
